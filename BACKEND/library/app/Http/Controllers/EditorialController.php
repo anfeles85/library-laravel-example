@@ -11,10 +11,12 @@ class EditorialController extends Controller
 {
     private $rules = [
         'name' => 'required|string|max:50|min:3',
+        'address' => 'string|max:80|min:3',
     ];
 
     private $traductionAttributes = [
         'name' => 'nombre',
+        'address' => 'dirección',
     ];
 
     public function applyValidator(Request $request)

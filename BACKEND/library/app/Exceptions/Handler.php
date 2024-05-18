@@ -6,6 +6,8 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -37,7 +39,7 @@ class Handler extends ExceptionHandler
             return response()->json(['message' => 'Acceso prohibido'], Response::HTTP_FORBIDDEN);
         }
 
-        if(str_contains(get_class($exception), "RouteNotFoundException"))
+        if($exception instanceof RouteNotFoundException)
         {
             return response()->json(['message' => 'No has iniciado session'], Response::HTTP_UNAUTHORIZED);
         }
