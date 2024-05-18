@@ -10,6 +10,7 @@ class Editorial extends Model
     use HasFactory;
 
     protected $table = 'editorial';
+    public $timestamps = false;
     protected $fillable = [
         'name',
         'address'

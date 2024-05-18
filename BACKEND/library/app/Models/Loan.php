@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Loan extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'loan';
     protected $fillable = [
         'member_id',
