@@ -17,7 +17,7 @@ class EditorialController extends Controller
     public function index()
     {
         $url = env('URL_BASE_API', 'http://localhost:8000/api');
-        $response = Http::acceptJson()->withToken(Session::get('token'))->get($url . $this->path);
+        $response = Http::acceptJson()->get($url . $this->path);
 
         if ($response->successful())
         {
@@ -25,10 +25,9 @@ class EditorialController extends Controller
             return view('editorial.index', compact('editorials'));
         }
         elseif ($response->status() === Response::HTTP_BAD_REQUEST) {            
-            $errors = $response->json()['errors'];
-            return redirect()->route('editorial.index')
-                ->with('messageModal', 'Error||Algunos campos tienen errores||error')
-                ->withInput()->withErrors($errors);
+            $errors = $response->json()['errors'];            
+            return redirect()->route('editorial.index')                
+                    ->withInput()->withErrors($errors);
         }
         else 
         {

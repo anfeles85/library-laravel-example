@@ -1,3 +1,5 @@
 <div>
-    <!-- No surplus words or unnecessary actions. - Marcus Aurelius -->
+    @foreach ($editorials as $editorial)      
+        <p>{{ $editorial['name'] }}</p>
+    @endforeach   
 </div>

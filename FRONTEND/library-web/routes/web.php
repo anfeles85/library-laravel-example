@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EditorialController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::prefix('editorial')->group(function(){
+    Route::get('/index', [EditorialController::class, 'index'])->name('editorial.index');
 });
