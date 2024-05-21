@@ -29,11 +29,11 @@
                             <td>{{ $editorial['name'] }}</td>
                             <td>{{ $editorial['address'] }}</td>
                             <td>
-                                <a href="#" title="editar" class="btn btn-primary btn-circle btn-sm">
+                                <a href="{{ route('editorial.edit', $editorial->id) }}" title="editar" class="btn btn-primary btn-circle btn-sm">
                                     <i class="far fa-edit"></i>
                                 </a>
-                                <a href="#" title="eliminar" class="btn btn-danger btn-circle btn-sm" 
-                                    onclick="return remove();">
+                                <a href="{{ route('editorial.destroy', $editorial->id) }}" title="eliminar" class="btn btn-danger btn-circle btn-sm" 
+                                    onclick="return confirm('¿Está seguro de que desea eliminar el registro?');">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
