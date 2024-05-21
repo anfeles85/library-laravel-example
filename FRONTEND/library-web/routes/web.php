@@ -19,5 +19,10 @@ Route::get('/', function () {
 });
 
 Route::prefix('editorial')->group(function(){
-    Route::get('/index', [EditorialController::class, 'index'])->name('editorial.index');
+    Route::get('/index', [EditorialController::class, 'index'])->name('editorial.index');   
+    Route::get('/create', [EditorialController::class, 'create'])->name('editorial.create');
+    Route::get('/edit/{id}', [EditorialController::class, 'edit'])->name('editorial.edit'); 
+    Route::post('/create', [EditorialController::class, 'store'])->name('editorial.store'); 
+    Route::put('/edit/{id}', [EditorialController::class, 'update'])->name('editorial.update'); 
+    Route::get('/destroy/{id}', [EditorialController::class, 'destroy'])->name('editorial.destroy'); 
 });
