@@ -49,21 +49,19 @@ class EditorialController extends Controller
     public function store(Request $request)
     {
         $url = env('URL_BASE_API', 'http://localhost:8000/api');
-        $response = Http::acceptJson()->withToken(Session::get('token'))->post($url . $this->path, [
-            'id'    =>  $request->id,
+        $response = Http::acceptJson()->post($url . $this->path, [           
             'name'    =>  $request->name,
-            'description'    =>  $request->type,
+            'address'    =>  $request->address,
         ]);
         
         if ($response->successful())
         {
-            return redirect()->route('editorial.index')
-                ->with('messageModal', 'Completado||Registro creado correctamente||success');
+            session()->flash('message', $response->json()['message']);
+            return redirect()->route('editorial.index');
         }
         elseif ($response->status() === Response::HTTP_BAD_REQUEST) {            
             $errors = $response->json()['errors'];
             return redirect()->route('editorial.create')
-                ->with('messageModal', 'Error||Algunos campos tienen errores||error')
                 ->withInput()->withErrors($errors);
         }
         else 
@@ -79,7 +77,7 @@ class EditorialController extends Controller
     public function edit(string $id)
     {
         $url = env('URL_BASE_API', 'http://localhost:8000/api');
-        $response = Http::acceptJson()->withToken(Session::get('token'))->get($url . $this->path . '/' . $id);
+        $response = Http::acceptJson()->get($url . $this->path . '/' . $id);
         
         if ($response->successful())
         {
@@ -90,7 +88,6 @@ class EditorialController extends Controller
             
             $errors = $response->json()['errors'];
             return redirect()->route('editorial.edit')
-                ->with('messageModal', 'Error||Algunos campos tienen errores||error')
                 ->withInput()->withErrors($errors);
         }
         else 
@@ -105,22 +102,21 @@ class EditorialController extends Controller
     public function update(Request $request, string $id)
     {
         $url = env('URL_BASE_API', 'http://localhost:8000/api');
-        $response = Http::withToken(Session::get('token'))->put($url . $this->path . '/' . $id, [
+        $response = Http::acceptJson()->put($url . $this->path . '/' . $id, [
             'id'    =>  $request->id,
             'name'    =>  $request->name,
-            'type'    =>  $request->type,
+            'address'    =>  $request->address,
         ]);
 
         if ($response->successful())
         {
-            return redirect()->route('editorial.index')
-                ->with('messageModal', 'Completado||Registro actualizado correctamente||success');
+            session()->flash('message', $response->json()['message']);
+            return redirect()->route('editorial.index');
         }
         elseif ($response->status() === Response::HTTP_BAD_REQUEST) {
             
             $errors = $response->json()['errors'];
             return redirect()->route('editorial.edit', $id)
-                ->with('messageModal', 'Error||Algunos campos tienen errores||error')
                 ->withInput()->withErrors($errors);
         }
         else 
@@ -139,19 +135,18 @@ class EditorialController extends Controller
 
         if($response->successful())
         {
-            return redirect()->route('editorial.index')
-                ->with('messageModal', 'Completado||Registro eliminado correctamente||success');
+            session()->flash('message', $response->json()['message']);
+            return redirect()->route('editorial.index');
         }
         elseif($response->status() === Response::HTTP_BAD_REQUEST) {
             $errors = $response->json()['errors'];
-            return redirect()->route('editorial.index')
-                ->with('messageModal', 'Error||Algunos campos tienen errores||error')
+            session()->flash('error', $errors);
+            return redirect()->route('editorial.index')                
                 ->withInput()->withErrors($errors);            
         }
         elseif($response->status() === Response::HTTP_NOT_FOUND) {
             session()->flash('warning', 'Registro no encontrado');
-            return redirect()->route('editorial.index')
-                ->with('messageModal', '¡Ojo!||Registro no encontrado||warning');
+            return redirect()->route('editorial.index');
         }
         else{
             abort($response->status());

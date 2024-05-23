@@ -11,11 +11,11 @@
                 @csrf
                 @method('PUT')
                 <div class="row form-group"> 
-                    <div class="col-lg-4 mb-4">
+                    <div class="col-lg-6 mb-4">
                         <label for="name">Nombre</label>
                         <input type="text" class="form-control" id="name" name="name" required value="{{ $editorial['name'] }}">
                     </div>                   
-                    <div class="col-lg-4 mb-4">
+                    <div class="col-lg-6 mb-4">
                         <label for="address">Dirección</label>
                         <input type="text" class="form-control" id="address" name="address" required value="{{ $editorial['address'] }}">
                     </div>                   

@@ -38,7 +38,7 @@
                 </a>
                 <div id="collapse1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Consultar</a>
+                        <a class="collapse-item" href="{{ route('book.index') }}">Consultar</a>
                         <a class="collapse-item" href="#">Crear</a>                        
                     </div>
                 </div>
@@ -66,8 +66,8 @@
                 </a>
                 <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Consultar</a>
-                        <a class="collapse-item" href="#">Crear</a>
+                        <a class="collapse-item" href="{{ route('editorial.index') }}">Consultar</a>
+                        <a class="collapse-item" href="{{ route('editorial.create') }}">Crear</a>
                     </div>
                 </div>
             </li>           
