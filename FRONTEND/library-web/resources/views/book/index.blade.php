@@ -1,11 +1,11 @@
 @extends('templates.base')
-@section('title', 'Editorial')
-@section('header', 'Editorial')
+@section('title', 'Libro')
+@section('header', 'Libro')
 @section('content')
 
     <div class="row">
         <div class="col-lg-12 mb-4 d-grid gap-2 d-md-block">            
-            <a href="{{ route('editorial.create') }}" class="btn btn-primary">Crear</a>                   
+            <a href="{{ route('book.create') }}" class="btn btn-primary">Crear</a>                   
         </div>
     </div>
 
@@ -17,22 +17,28 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Dirección</th>
+                        <th>ISBN</th>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Editorial</th>
+                        <th>Categoría</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody> 
-                    @foreach ($editorials as $editorial)                       
+                    @foreach ($books as $book)                       
                         <tr>
-                            <td>{{ $editorial['id'] }}</td>
-                            <td>{{ $editorial['name'] }}</td>
-                            <td>{{ $editorial['address'] }}</td>
+                            <td>{{ $book['id'] }}</td>
+                            <td>{{ $book['isbn'] }}</td>
+                            <td>{{ $book['title'] }}</td>
+                            <td>{{ $book['author'] }}</td>
+                            <td>{{ $book['editorial']['name'] }}</td>
+                            <td>{{ $book['category']['name'] }}</td>
                             <td>
-                                <a href="{{ route('editorial.edit', $editorial['id']) }}" title="editar" class="btn btn-info btn-circle btn-sm">
+                                <a href="{{ route('book.edit', $book['id']) }}" title="editar" class="btn btn-info btn-circle btn-sm">
                                     <i class="far fa-edit"></i>
                                 </a>
-                                <a href="{{ route('editorial.destroy', $editorial['id']) }}" title="eliminar" class="btn btn-danger btn-circle btn-sm" 
+                                <a href="{{ route('book.destroy', $book['id']) }}" title="eliminar" class="btn btn-danger btn-circle btn-sm" 
                                     onclick="return confirm('¿Está seguro de que desea eliminar el registro?');">
                                     <i class="fas fa-trash"></i>
                                 </a>

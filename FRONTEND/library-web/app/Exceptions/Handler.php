@@ -47,7 +47,7 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function render($request, Throwable $exception)
+    /* public function render($request, Throwable $exception)
     {
         if ($exception instanceof HttpException) {
             $statusCode = $exception->getStatusCode();
@@ -62,6 +62,6 @@ class Handler extends ExceptionHandler
         }
 
         return parent::render($request, $exception);
-    }
+    } */
 
 }
